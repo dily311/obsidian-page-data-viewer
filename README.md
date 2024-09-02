@@ -1,96 +1,127 @@
-# Obsidian Sample Plugin
+obsidian-dataviewjs-template-table 
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+위의 레포를 플러그인으로 변환하였습니다
 
-This project uses TypeScript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in TypeScript Definition format, which contains TSDoc comments describing what it does.
+# Obsidian page data viewer
+![image](./screenshot/screenshot.png)
 
-**Note:** The Obsidian API is still in early alpha and is subject to change at any time!
+## 필수 플러그인
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+본 플러그인을 사용하려면 반드시 dataview 플러그인이 필요합니다
 
-## First time developing plugins?
+## 작성형식
 
-Quick starting guide for new plugin devs:
+````
+```page-table
+header: 제목 # 선택
+pages: "#독서" # dataview 쿼리
+filterList : [tags, status, category, genre, author]
+rows : [cover_url, file.link, author, tags, book_note, status, rTime_created]   # 선택  | 작성하지 않을 경우 기본 값 "file.link"
+selectedValue : 12 # 선택 | 작성하지 않을 경우 기본 값 10
+filter : # 선택
+- label: # 필터 목록에 표시할 이름
+  type: # tags나 property, file.변수 사용가능 
+  target: # tags의 이름이나 property 속성명 또는 file.변수에서 포함시킬 대상
+  target_content: # property를 사용시 선택 | target이 property인 경우 target의 내용을 비교하기 위한 변수
+  target_isInclude: # 선택 | target이 type에 포함되어 있는지 판별, property와 사용하는 경우, target이 null인지 체크하는 역할
+- label: 📕 완독서
+  type: property
+  target: status
+  target_content: true
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+- label: 📖 읽고 있는 책
+  type: property
+  target: status
+  target_content: false
 
-## Releasing new releases
+- label: eBook만
+  type: property
+  target: category
+  target_content: eBook
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
-- Publish the release.
+- label: 영어공부만
+  type: property
+  target: genre
+  target_content: 영어
 
-> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
+- label: 프로그래밍만
+  type: tags
+  target: 프로그래밍
+  target_isInclude: true
 
-## Adding your plugin to the community plugin list
+- label: 올해의 독서
+  type: property
+  target: created
+  target_content: 2024-01-01 ~ now
 
-- Check the [plugin guidelines](https://docs.obsidian.md/Plugins/Releasing/Plugin+guidelines).
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+filterDefault: [올해의 독서] # 선택
+sort :  # 선택
+- label: 완독일순 (최신순)  # 정렬 목록에 표시할 이름
+  type: finish_read_date # property나 file.cday, file.mday 등
+  sort: desc # asc or desc
+- label: 완독일순 (오래된순)
+  type: finish_read_date
+  sort: asc
 
-## How to use
+cls: 클래스명 # 선택
+options: [tasksView] # 선택
 
-- Clone this repo.
-- Make sure your NodeJS is at least v16 (`node --version`).
-- `npm i` or `yarn` to install dependencies.
-- `npm run dev` to start compilation in watch mode.
-
-## Manually installing the plugin
-
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
-
-## Improve code quality with eslint (optional)
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- To use eslint with this project, make sure to install eslint from terminal:
-  - `npm install -g eslint`
-- To use eslint to analyze this project use this command:
-  - `eslint main.ts`
-  - eslint will then create a report with suggestions for code improvement by file and line number.
-- If your source code is in a folder, such as `src`, you can use eslint with this command to analyze all files in that folder:
-  - `eslint .\src\`
-
-## Funding URL
-
-You can include funding URLs where people who use your plugin can financially support it.
-
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
-
-```json
-{
-    "fundingUrl": "https://buymeacoffee.com"
-}
 ```
+````
 
-If you have multiple URLs, you can also do:
+## 변수
 
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
+- pages: dataview의 pages와 동일
+- rows: (선택) 표시될 row목록, 기본값 : file.link
+	- cover_url: 페이지 내의 이미지를 가져오거나 미리 property로 설정된 cover_url 이미지를 가져옴
+	- rTime_(file.cday나 created 등) : 상대적으로 시간을 표시해줌
+- header: (선택) 제목추가
+- selectedValue: (선택) 한번에 표시될 페이지 수, 기본값 : 10
+- filterList: (선택) filter와 동일하지만 필터 선택 모달을 생성
+	- ![image](./screenshot/filterList.png)
+- filter : (선택) 테이블 필터링
+	- 변수목록
+		- label : 표시될 값을 작성
+		- type: tags나 property, file.변수 사용가능
+		- target: tags의 이름이나 property 속성명 또는 file.변수에서 포함시킬 대상
+		- target_content : property를 사용할 경우 target의 내용을 비교하기 위한 변수
+		- target_isInclude : (true/ false) tags나 property가 해당 md 문서에 존재하는지 판단
+- filterDefault : (선택) filter 중 기본적으로 사용하고 싶은 필터가 있을 경우 해당 필터의 label을 작성해서 사용
+- sort : (선택) sort를 추가할 수 있음
+- sortDefault : (선택) sort 중에서 기본적으로 사용하고 싶은 필터가 있을 경우 해당 번호 작성 (0부터 시작하므로 주의)
+- cls: (선택) 해당 테이블에 클래스 추가 가능
+- options: (선택) 
+	- tasksView : 밑 부분에 pages의 task를 표시해줌
+ 		- ![image](./screenshot/tasksView.png)
+  - noPagination : pagination 없앰
+
+
+## CSV 지원
+
+````
+```page-table-csv
+pages: "etc/csv/좋아하는_노래.csv" 
 ```
+````
 
-## API Documentation
+필터 기능을 제외한 변수를 모두 사용할 수 있습니다.
 
-See https://github.com/obsidianmd/obsidian-api
+
+## Tasks View 지원
+
+![image](./screenshot/tasksView.png)
+
+````
+```page-tasks
+```
+````
+
+현재 페이지의 tasks 목록을 확인 할 수 있습니다.
+
+````
+```page-tasks
+pages: "#독서"
+```
+````
+
+pages 변수를 통해 tasks 목록을 볼 페이지를 지정할 수 있습니다.

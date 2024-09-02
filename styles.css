@@ -1,8 +1,223 @@
-/*
+:is(.block-language-page-table, .block-language-page-table-csv, .block-language-page-tasks) .loading {
+  text-align: center;
+}
+:is(.block-language-page-table, .block-language-page-table-csv, .block-language-page-tasks) .loading .loading_spinner {
+  margin: 0 auto;
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--ui1);
+  border-top: 3px solid var(--tx1);
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.tasksListWrap {
+  display: flex;
+  gap: 20px;
+  margin-top: auto;
+  padding-top: 2rem;
+}
+.tasksListWrap .taskList {
+  width: 100%;
+}
+.tasksListWrap .taskList :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+}
+.tasksListWrap details > summary {
+  cursor: pointer;
+  padding-top: 0.4em;
+}
 
-If your plugin does not need CSS, delete this file.
-
-*/
+.block-language-page-table .toolbarContainer,
+.block-language-page-table-csv .toolbarContainer {
+  padding-bottom: 16px;
+}
+.block-language-page-table .toolbarContainer::after,
+.block-language-page-table-csv .toolbarContainer::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.block-language-page-table .toolbarContainer .toolbar,
+.block-language-page-table-csv .toolbarContainer .toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-bottom: 6px;
+}
+.block-language-page-table .toolbarContainer .toolbar .toolbar-left,
+.block-language-page-table-csv .toolbarContainer .toolbar .toolbar-left {
+  display: flex;
+}
+.block-language-page-table .toolbarContainer .toolbar .toolbar-left .pagination-box,
+.block-language-page-table-csv .toolbarContainer .toolbar .toolbar-left .pagination-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+.block-language-page-table .toolbarContainer .toolbar .toolbar-left .pagination-box button,
+.block-language-page-table-csv .toolbarContainer .toolbar .toolbar-left .pagination-box button {
+  background: transparent;
+}
+.block-language-page-table .toolbarContainer .toolbar .toolbar-left .pagination-box button:hover, .block-language-page-table .toolbarContainer .toolbar .toolbar-left .pagination-box button.is-active,
+.block-language-page-table-csv .toolbarContainer .toolbar .toolbar-left .pagination-box button:hover,
+.block-language-page-table-csv .toolbarContainer .toolbar .toolbar-left .pagination-box button.is-active {
+  background: var(--background-modifier-hover);
+}
+.block-language-page-table .toolbarContainer .toolbar .toolbar-right,
+.block-language-page-table-csv .toolbarContainer .toolbar .toolbar-right {
+  display: flex;
+  margin-left: auto;
+}
+.block-language-page-table .toolbarContainer .filter-showing-box,
+.block-language-page-table-csv .toolbarContainer .filter-showing-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  line-height: 1.8;
+  font-size: small;
+}
+.block-language-page-table .toolbarContainer .filter-showing-box .appliedFilter,
+.block-language-page-table-csv .toolbarContainer .filter-showing-box .appliedFilter {
+  display: flex;
+  float: left;
+}
+.block-language-page-table .toolbarContainer .filter-showing-box .appliedFilter .filter-tip,
+.block-language-page-table-csv .toolbarContainer .filter-showing-box .appliedFilter .filter-tip {
+  padding: 2px 0;
+  margin-right: 8px;
+  color: var(--icon-color);
+}
+.block-language-page-table .toolbarContainer .filter-showing-box .appliedFilter .filter-item,
+.block-language-page-table-csv .toolbarContainer .filter-showing-box .appliedFilter .filter-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 8px;
+  margin-right: 6px;
+  cursor: pointer;
+  border: 1px solid var(--divider-color);
+  border-radius: 6px;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.block-language-page-table .toolbarContainer .box,
+.block-language-page-table-csv .toolbarContainer .box {
+  position: relative;
+}
+.block-language-page-table .toolbarContainer .box .menu,
+.block-language-page-table-csv .toolbarContainer .box .menu {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: translateY(100%);
+  max-height: 250px;
+  overflow: auto;
+}
+.block-language-page-table .toolbarContainer .box .menu .menu-item,
+.block-language-page-table-csv .toolbarContainer .box .menu .menu-item {
+  align-items: start;
+  justify-content: space-between;
+}
+.block-language-page-table .toolbarContainer .box .menu .menu-item .menu-item-title,
+.block-language-page-table-csv .toolbarContainer .box .menu .menu-item .menu-item-title {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.block-language-page-table .toolbarContainer .filter-list-container,
+.block-language-page-table-csv .toolbarContainer .filter-list-container {
+  display: flex;
+}
+.block-language-page-table .toolbarContainer .filter-list-container .filter-list,
+.block-language-page-table-csv .toolbarContainer .filter-list-container .filter-list {
+  border: 1px solid var(--divider-color);
+  margin-right: 6px;
+}
+.block-language-page-table .toolbarContainer .filter-list-container .filter-list .filter-list-title,
+.block-language-page-table-csv .toolbarContainer .filter-list-container .filter-list .filter-list-title {
+  margin-right: 4px;
+}
+.block-language-page-table .toolbarContainer .filter-list-container .filter-list .menu,
+.block-language-page-table-csv .toolbarContainer .filter-list-container .filter-list .menu {
+  position: absolute;
+  left: 0;
+  right: auto;
+  bottom: 0;
+  max-width: 32em;
+  max-height: 32em;
+  overflow: auto;
+}
+.block-language-page-table .toolbarContainer .filter-list-container .filter-list.selected .filteringBtn,
+.block-language-page-table-csv .toolbarContainer .filter-list-container .filter-list.selected .filteringBtn {
+  background: hsla(var(--interactive-accent-hsl), 0.1);
+  border: none;
+}
+.block-language-page-table .toolbarContainer .filter-list-container .filter-list.selected .filter-list-title, .block-language-page-table .toolbarContainer .filter-list-container .filter-list.selected .filter-list-title-icon .svg-icon,
+.block-language-page-table-csv .toolbarContainer .filter-list-container .filter-list.selected .filter-list-title,
+.block-language-page-table-csv .toolbarContainer .filter-list-container .filter-list.selected .filter-list-title-icon .svg-icon {
+  color: var(--text-accent);
+}
+.cards .block-language-page-table .page-table-wrapper table thead,
+.cards .block-language-page-table-csv .page-table-wrapper table thead {
+  display: none;
+}
+.block-language-page-table .page-table-wrapper table tbody.table-view-tbody td .file-title a, .block-language-page-table .page-table-wrapper table tbody.table-view-tbody td .file-title a:hover,
+.block-language-page-table-csv .page-table-wrapper table tbody.table-view-tbody td .file-title a,
+.block-language-page-table-csv .page-table-wrapper table tbody.table-view-tbody td .file-title a:hover {
+  color: var(--text-normal);
+  text-decoration: none;
+  font-weight: 400;
+}
+.block-language-page-table .page-table-wrapper table tbody.table-view-tbody td .file-title a::before,
+.block-language-page-table-csv .page-table-wrapper table tbody.table-view-tbody td .file-title a::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 4px;
+  vertical-align: text-bottom;
+  background-color: currentColor;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-file-text'%3E%3Cpath d='M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z'/%3E%3Cpath d='M14 2v4a2 2 0 0 0 2 2h4'/%3E%3Cpath d='M10 9H8'/%3E%3Cpath d='M16 13H8'/%3E%3Cpath d='M16 17H8'/%3E%3C/svg%3E");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-file-text'%3E%3Cpath d='M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z'/%3E%3Cpath d='M14 2v4a2 2 0 0 0 2 2h4'/%3E%3Cpath d='M10 9H8'/%3E%3Cpath d='M16 13H8'/%3E%3Cpath d='M16 17H8'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+}
+.block-language-page-table .page-table-wrapper table tbody.table-view-tbody td:has(.embed-file),
+.block-language-page-table-csv .page-table-wrapper table tbody.table-view-tbody td:has(.embed-file) {
+  width: 100%;
+  max-width: none;
+}
+.block-language-page-table .page-table-wrapper + div > .moreBtn,
+.block-language-page-table-csv .page-table-wrapper + div > .moreBtn {
+  width: 100%;
+  background: none;
+  box-shadow: none;
+  margin-top: 10px;
+}
+.block-language-page-table .page-table-wrapper + div > .moreBtn:hover,
+.block-language-page-table-csv .page-table-wrapper + div > .moreBtn:hover {
+  background: var(--background-primary-alt);
+}
+.block-language-page-table details > summary,
+.block-language-page-table-csv details > summary {
+  cursor: pointer;
+  color: var(--text-muted);
+}
