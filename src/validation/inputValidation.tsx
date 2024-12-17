@@ -9,6 +9,7 @@ export default function inputValidation(source: string, type?: string): pageData
 		const [pages, where] = handlePage(input.pages, type);
 		const [rows, showRows] = handleRows(input.rows);
 		const data = {
+			layout: input.layout || "table",
 			pages: pages,
 			where: where,
 			rows: rows,

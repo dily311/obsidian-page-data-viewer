@@ -219,5 +219,5 @@
 .block-language-page-table details > summary,
 .block-language-page-table-csv details > summary {
   cursor: pointer;
-  color: var(--text-muted);
+  font-size: var(--h1-size);
 }

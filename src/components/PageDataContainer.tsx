@@ -12,6 +12,7 @@ import Pagination from "./toolbar/Pagination";
 import Select from "./toolbar/Select";
 import { PagesDataContext } from "context/PagesDataContext";
 import TasksListWrap from "./TasksListWrap";
+import { Ellipsis } from "lucide-react";
 
 
 export default function PageDataContainer({
@@ -79,6 +80,9 @@ export default function PageDataContainer({
 						{input.filter && (
 							<AppliedFilter filter={input.filter} />
 						)}
+						<div className="toolbar_setting">
+							<Ellipsis className="svg-icon" />
+						</div>
 					</div>
 				</div>
 			</PagesDataContext.Provider>

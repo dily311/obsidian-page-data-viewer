@@ -22,7 +22,7 @@
 		"esbuild": "0.17.3",
 		"luxon": "^3.4.4",
 		"obsidian": "latest",
-		"obsidian-dataview": "^0.5.66",
+		"obsidian-dataview": "^0.5.67",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-error-boundary": "^4.0.13",

@@ -1,4 +1,5 @@
 export interface pageData {
+	readonly layout: string;
 	readonly pages: string;
 	readonly where?: string;
 	readonly rows: Array<string>;

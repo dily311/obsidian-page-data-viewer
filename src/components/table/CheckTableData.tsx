@@ -59,6 +59,7 @@ function CheckTableData({
 					}
 					return (
 						<EmbedPage
+							filename={page.file.name}
 							content={String(file)}
 							sourcePath={sourcePath}
 							isOpen={isOpen}
@@ -82,7 +83,7 @@ function CheckTableData({
 	return <CheckRawList value={page[row]} sourcePath={sourcePath} inline={false} relativeTime={relativeTime} />;
 }
 
-function EmbedPage({content, sourcePath, isOpen, cls}: {content: string; sourcePath: string; isOpen: boolean; cls: string;}) {
+function EmbedPage({filename, content, sourcePath, isOpen, cls}: {filename: string; content: string; sourcePath: string; isOpen: boolean; cls: string;}) {
 	const [open, setOpen] = useState(isOpen);
 	return (
 		<details
@@ -91,7 +92,7 @@ function EmbedPage({content, sourcePath, isOpen, cls}: {content: string; sourceP
 			className={cls}
 		>
 			<summary className="file-title" onClick={() => setOpen(!open)}>
-				세부정보
+				{filename}
 			</summary>
 			<Markdown content={`!${content}`} sourcePath={sourcePath} />
 		</details>

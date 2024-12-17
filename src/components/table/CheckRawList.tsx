@@ -83,7 +83,9 @@ function CheckForRaw({
 				</>
 			);
 		case "duration":
-			return <>{renderMinimalDuration(value)}</>;
+			return <>{relativeTime
+						? getRelativeTime(value, dv.settings, currentLocale())
+						: renderMinimalDuration(value)}</>;
 		case "link":
 			return <Markdown content={value.markdown()} sourcePath={sourcePath} cls={cls} />;
 		case "link_img":

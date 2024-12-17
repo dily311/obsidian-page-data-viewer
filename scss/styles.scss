@@ -1,20 +1,25 @@
+.block-language-page-table, .block-language-page-table-csv, .block-language-page-tasks {
+    .loading {
+        text-align: center;
 
-:is(.block-language-page-table, .block-language-page-table-csv, .block-language-page-tasks) .loading {
-    text-align: center;
-
-    .loading_spinner {	
-        margin: 0 auto;
-        width: 36px;
-        height: 36px;
-        border: 3px solid var(--ui1);
-        border-top: 3px solid var(--tx1);
-        border-radius: 50%;
-        animation: spin 2s linear infinite;
+        .loading_spinner {	
+            margin: 0 auto;
+            width: 36px;
+            height: 36px;
+            border: 3px solid var(--ui1);
+            border-top: 3px solid var(--tx1);
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+        }
+    
+        @keyframes spin {
+            0% {transform: rotate(0deg);}	
+            100% {transform: rotate(360deg);}	
+        }
     }
 
-    @keyframes spin {
-        0% {transform: rotate(0deg);}	
-        100% {transform: rotate(360deg);}	
+    & + .edit-block-button {
+        display: none;
     }
 }
 
@@ -236,6 +241,7 @@
     
     details > summary {
         cursor: pointer;
-        color: var(--text-muted);
+        font-size: var(--h1-size);
     }
 }
+
