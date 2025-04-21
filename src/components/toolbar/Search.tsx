@@ -1,7 +1,8 @@
-import { usePagesData } from "context/PagesDataContext";
+import { useControl } from "context/ControlContext";
 
 export default function Search() {
-	const { searchValue, handleSearch, handleSearchInit } = usePagesData();
+	const { state, dispatch } = useControl();
+    
 	return (
 		<div className="search-input-container">
 			<input
@@ -10,12 +11,12 @@ export default function Search() {
 				enterKeyHint="search"
 				spellCheck={false}
 				placeholder="입력하여 검색 시작..."
-				value={searchValue}
-				onChange={(e) => handleSearch(e.target.value)}
+				value={state.searchKeyword}
+				onChange={(e) => dispatch({type: "WRITE_SEARCH", keyword: e.target.value})}
 			/>
 			<div
 				className="search-input-clear-button"
-				onClick={handleSearchInit}
+				onClick={() => dispatch({type: "INIT_SEARCH"})}
 			></div>
 		</div>
 	);

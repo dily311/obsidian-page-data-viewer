@@ -1,12 +1,7 @@
-import { FallbackProps } from "react-error-boundary";
+import React from 'react'
 
-export function ErrorPage({ error }: FallbackProps) {
-	return (
-		<section>
-			<div>
-				<h1>ErrorPage</h1>
-				<pre>{error.message}</pre>
-			</div>
-		</section>
-	);
+export default function ErrorPage() {
+  return (
+    <div>ErrorPage</div>
+  )
 }
